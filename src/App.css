@@ -1,23 +1,30 @@
 .App {
   background: rgba(59, 59, 59, 1);
   padding: 10px;
-  height: 100dvh;
+  min-height: 100dvh;
   color: white;
   --primary: rgba(244, 187, 74, 1);
   --shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+h1, h2 {
+  font-weight: 700;
+  margin: 9px 0;
+  color: white;
 }
 
 h1 {
   font-size: 32px;
   line-height: 36.77px;
-  font-weight: 700;
 }
 
 h2 {
   font-size: 28px;
   line-height: 32.17px;
   font-style: italic;
-  font-weight: 700;
 }
 
 .radius-10 {
@@ -38,8 +45,8 @@ h2 {
 }
 
 .status-card {
-  height: 70%;
-  width: 25%;
+  padding: 30px 0;
+  width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,9 +65,10 @@ h2 {
   font-size: 16px;
   line-height: 18.38px;
   font-weight: 700;
+  color: white;
 }
 
-.status-card.income span.value {
+.status-card.income b.value {
   color: rgba(157, 255, 91, 1);
 }
 
@@ -68,7 +76,7 @@ h2 {
   background: linear-gradient(90deg, #B5DC52 0%, #89E148 100%);
 }
 
-.status-card.expense span.value {
+.status-card.expense b.value {
   color: var(--primary);
 }
 
@@ -76,17 +84,31 @@ h2 {
   background: linear-gradient(90deg, #FF9595 0%, #FF4747 80%, #FF3838 100%);
 }
 
+.pie-chart {
+  width: 30%;
+  height: 200px;
+}
+
 .secondary-container-parent {
   display: flex;
   gap: 30px;
+  flex: 1 0;
 }
 
-.secondary-container-parent .secondary-container:first-of-type {
-  flex-basis: 60%;
+.secondary-container-parent .secondary-container-wrapper {
+  flex: 1 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.secondary-container-parent .secondary-container-wrapper:first-of-type {
+  flex-basis: 40%;
 }
 
 .secondary-container {
-  flex: 1 1;
+  flex: 1 0;
+  display: flex;
+  flex-direction: column;
   background: white;
   box-shadow: var(--shadow);
   border-radius: 15px;
@@ -103,13 +125,18 @@ h2 {
   border-bottom: 1px solid rgba(155, 155, 155, 1);
 }
 
+.transaction .name {
+  margin-right: auto;
+  padding-left: 15px;
+}
+
 .transaction .subtitle {
   color: rgba(155, 155, 155, 1);
 }
 
 .transaction .type-icon {
   height: 38px;
-  aspect-ratio: square;
+  width: 38px;
   border-radius: 9999px;
   display: flex;
   justify-content: center;
@@ -117,13 +144,21 @@ h2 {
   background: rgba(217, 217, 217, 1);
 }
 
+.transaction .action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .transaction .action-buttons button {
   height: 37px;
+  width: 37px;
   border-radius: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: var(--shadow);
+  color: white;
 }
 
 .transaction .action-buttons button.remove {
@@ -143,30 +178,31 @@ h2 {
   gap: 21px;
 }
 
-.transaction nav {
+.secondary-container:first-of-type nav {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 13px;
+  margin-top: auto;
 }
 
-.transaction nav > * {
+.secondary-container:first-of-type nav > * {
   box-shadow: var(--shadow);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 37px;
-  aspect-ratio: square;
+  width: 37px;
 }
 
-.transaction nav .page {
+.secondary-container:first-of-type nav .page {
   background: rgba(67, 150, 123, 1);
   color: white;
   font-size: 14px;
   border-radius: 5px;
 }
 
-.transaction nav button {
+.secondary-container:first-of-type nav button {
   border-radius: 15px;
 }
 
@@ -175,11 +211,18 @@ h2 {
 }
 
 .modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: black;
   padding: 30px;
+  border: none;
+  min-width: 400px;
 }
 
 .modal h1 {
+  color: black;
   font-size: 30px;
   line-height: 34.47px;
   font-weight: 700;
@@ -202,4 +245,47 @@ h2 {
 
 .modal button.field.cancel {
   width: 112px;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.modal.expense form select.field, .modal.expense form input.field {
+  flex-basis: calc(50% - 7px);
+}
+
+@media screen and (max-width: 600px) {
+
+  html, body {
+    height: auto;
+    min-height: 100%;
+  }
+
+  .main-container {
+    flex-direction: column;
+    padding: 10px 0;
+    gap: 10px;
+  }
+
+  .pie-chart {
+    width: 100%;
+  }
+
+  .status-card {
+    width: 90%;
+  }
+  
+  .secondary-container-parent {
+    flex-direction: column;
+  }
+
+  .secondary-container:nth-of-type(1) {
+    height: 30vh;
+    min-height: 30vh;
+  } 
+
 }
